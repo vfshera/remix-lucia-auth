@@ -1,0 +1,21 @@
+{
+  "name": "remix-lucia-auth",
+  "version": "0.0.0",
+  "description": "",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vfshera/remix-lucia-auth.git"
+  },
+  "scripts": {},
+  "keywords": [
+    "Remix Lucia Auth",
+    "lucia-auth",
+    "remix"
+  ],
+  "author": {
+    "name": "Franklin Shera",
+    "url": "https://github.com/vfshera"
+  },
+  "license": "MIT"
+}
