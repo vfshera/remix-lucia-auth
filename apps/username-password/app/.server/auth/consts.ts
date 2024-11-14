@@ -1,0 +1,5 @@
+export const SESSION_REFRESH_INTERVAL_MS = 1000 * 60 * 60 * 24 * 15;
+
+export const SESSION_MAX_DURATION_MS = SESSION_REFRESH_INTERVAL_MS * 2;
+
+export const SESSION_COOKIE_NAME = "session";
