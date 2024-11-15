@@ -72,6 +72,7 @@ module.exports = {
       rules: {
         "no-console": "warn",
         "no-unused-vars": "off",
+        "import/no-unresolved": "off", // to be removed
         "@typescript-eslint/no-unused-vars": [
           "warn",
           {
