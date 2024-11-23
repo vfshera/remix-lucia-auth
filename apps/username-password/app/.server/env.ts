@@ -1,7 +1,8 @@
+/* eslint-disable no-console */
 import { config } from "dotenv";
 import { expand } from "dotenv-expand";
 
-import { ZodError, z } from "zod";
+import { z } from "zod";
 
 const stringBoolean = z.coerce
   .string()
@@ -12,30 +13,19 @@ const stringBoolean = z.coerce
 
 const EnvSchema = z.object({
   DB_MIGRATING: stringBoolean,
+  SESSION_SECRET: z.string().min(16, "Must be at least 16 characters long"),
 });
 
 export type EnvSchema = z.infer<typeof EnvSchema>;
 
 expand(config());
 
-try {
-  EnvSchema.parse(process.env);
-} catch (error) {
-  if (error instanceof ZodError) {
-    let message = "Missing required values in .env:\n";
+const { data: env, error } = EnvSchema.safeParse(process.env);
 
-    error.issues.forEach((issue) => {
-      message += issue.path[0] + "\n";
-    });
-
-    const e = new Error(message);
-
-    e.stack = "";
-
-    throw e;
-  } else {
-    console.error(error);
-  }
+if (error) {
+  console.error("❌ Invalid env:");
+  console.error(JSON.stringify(error.flatten().fieldErrors, null, 2));
+  process.exit(1);
 }
 
-export default EnvSchema.parse(process.env);
+export default env!;
